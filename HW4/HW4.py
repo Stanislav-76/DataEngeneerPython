@@ -1,9 +1,50 @@
+# Напишите функцию для транспонирования матрицы
+
+
+def matrix_transpose(m):
+    new = []
+    for i in range(len(m[0])):
+        new.append([])
+    for i in range(len(m)):
+        for j in range(len(m[i])):
+            new[j].append(m[i][j])
+    return new
+    
+    
+print(matrix_transpose([[1, 2], [3, 4], [5, 6]]))
+
+# Напишите функцию принимающую на вход только ключевые параметры и возвращающую 
+# словарь, где ключ — значение переданного аргумента, а значение — имя аргумента. 
+# Если ключ не хешируем, используйте его строковое представление.
+
+
+def make_dict_keys(**kwargs):
+    d = {}
+    for key, value in kwargs.items():
+        try:
+            d[value] = key
+        except:
+            value = str(value)
+            d[value] = key
+    return d
+    
+    
+print(make_dict_keys(a=5, b=6, c=[8, 9]))
+
+
+# Возьмите задачу о банкомате из семинара 2. Разбейте её на отдельные операции — функции. 
+# Дополнительно сохраняйте все операции поступления и снятия средств в список.
+
+
 def main():
     balance = 0
     count = 0
+    global operation
+    operation = []
     print('Добро пожаловать в банкомат!')
     while True:
         while True:
+            # print(operation)
             act = input(
                 'Выберите действие:\n 1 - пополнить \n 2 - снять \n 3 - выйти\n')
             if act not in ("1", "2", "3"):
@@ -41,6 +82,7 @@ def add_money(balance, count):
     count += 1
     if count % 3 == 0:
         balance *= 1.03
+    operation.append(f"Пополнение на {summ}")
     return balance, count
 
 
@@ -71,6 +113,7 @@ def get_money(balance, count):
     count += 1
     if count % 3 == 0:
         balance *= 1.03
+    operation.append(f"Снятие на {summ}")
     return balance, count
 
 
