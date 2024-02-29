@@ -10,7 +10,7 @@
 import os
 
 
-def rename_files(names: str, len_count: int, ext: str, ext_out: str, name_diap: list):
+def rename_files(len_count: int, ext: str, ext_out: str, name_diap: list, names: str = ""):
     print(os.listdir("Test"))
     count = 1
     for file in os.listdir("Test"):
@@ -19,8 +19,8 @@ def rename_files(names: str, len_count: int, ext: str, ext_out: str, name_diap: 
             if len(str(count)) <= len_count:
                 file_count = "0" * (len_count - len(str(count))) + str(count)
                 count += 1
-                file_out = file.split(".")[0][name_diap[0]: name_diap[1]] + file_count + "." + ext_out
+                file_out = file.split(".")[0][name_diap[0]: name_diap[1]] + names + file_count + "." + ext_out
                 os.rename(os.path.join("Test", file), os.path.join("Test", file_out))
 
 
-rename_files("test", 2, "txt", "doc", [3, 6])
+rename_files(2, "txt", "doc", [3, 6], "test")
